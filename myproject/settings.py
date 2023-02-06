@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'juegos.apps.JuegosConfig',
     'publicaciones.apps.PublicacionesConfig',
+    'destacado.apps.DestacadoConfig',
 ]
 
 MIDDLEWARE = [

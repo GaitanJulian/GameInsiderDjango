@@ -1,0 +1,257 @@
+/* Etiquetas */
+
+body {
+    background-color: #E9EBEE;
+}
+
+form {
+    margin: 0 auto;
+    position: relative;
+    width: 75%;
+}
+  
+  input[type="text"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+  }
+  
+  button[type="submit"] {
+    width: 20%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+
+
+/* Clases */
+
+.navbar {
+    background-color: #122536ff;;
+}
+
+.navbar-bar {
+    color:  #384447ff;
+}
+
+.custom-nav-bg{
+  background-color: #001F3F;
+}
+
+.profile-pic{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+    margin-top: 10px;
+}
+
+.profile-menu {
+    display: none;
+    background-color: rgba(0,0,0,0.8);
+    padding: 0.5em;
+    
+}
+
+.dark-dropdown {
+    background-color: #222222;
+}
+
+.profile-menu.show {
+    display: block;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 1;
+}
+/*--- Pointing arrow ---*/
+.dropdown-toggle {
+    position: relative;
+    padding-right: 25px;
+}
+
+.dropdown-toggle::after { 
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid white;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    margin-top: -2.5px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2%;
+  }
+  
+.logo {
+    width: 30%; /* adjust to the size of your logo */
+    height: 30%; /* adjust to the size of your logo */
+  }
+
+  .search-container {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    margin-top: 3%;
+  }
+
+  .search-container input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .search-container button {
+    width: auto;
+    padding: 10px 18px;
+    color: rgb(9, 8, 8);
+    background-color: transparent;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+  }
+
+  .search-container form {
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-container input[type="text"] {
+    width: 75%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    flex:1;
+  }
+   
+.search-container i {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+  .search-container form {
+    display: flex;
+    align-items: center;
+    position: relative; /* Add this */
+}
+
+ .fa {
+    font-size: 1.5em;
+  }
+
+  /* ----------------CARRUSEL DE IMAGENES SACADO DE https://codingyaar.com/bootstrap-4-carousel-multiple-items-responsive */
+  .cards-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+  .card img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+  .card {
+    margin: 0 0.5em;
+    box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);
+    border: none;
+    border-radius: 1;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .card:hover {
+    box-shadow: 0px 0px 10px 2px #ddd;
+    transform: scale(0.9);
+    background-color: #ddd;
+    z-index: 100;
+}
+
+  .carousel-inner {
+    padding: 1em;
+    transition: transform 0.5s ease-in-out;
+  }
+  .carousel-control-prev,
+  .carousel-control-next {
+    background-color: #e1e1e1;
+    width: 5vh;
+    height: 5vh;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .card-img-top{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+  
+  .carousel-item {
+    transition: transform 0.3s ease-in-out, opacity 0.6s ease-in-out;
+}
+
+/*---------  Selectores de ID ----------*/
+#search-icon{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+/* Large screens */
+@media (min-width: 1200px) {
+    #profile-pic {
+      width: 50px;
+      height: 50px;
+    }
+    #profile-menu {
+      position: absolute;
+      right: 10px;
+      top: 60px;
+    }
+  }
+  
+
+  /* Small screens */
+  @media (max-width: 1199px) {
+    #profile-pic {
+      width: 30px;
+      height: 30px;
+    }
+    #profile-menu {
+      position: absolute;
+      right: 10px;
+      top: 60px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .card img {
+      height: 11em;
+    }
+  }

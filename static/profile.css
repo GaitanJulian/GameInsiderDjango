@@ -1,0 +1,36 @@
+.no-animated {
+    transform: none !important;
+}
+
+.no-shadow {
+    box-shadow: none !important;
+    background-color: #fff !important;
+}
+
+i[data-badge-name]:hover:after {
+    content: attr(data-badge-name);
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -10px);
+    padding: 5px 10px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 12px;
+ }
+
+ .metadata {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    margin-top: 10px;
+  }
+  
+  .metadata i {
+    margin-right: 5px;
+  }
+  
+  .metadata span {
+    margin-right: 10px;
+  }

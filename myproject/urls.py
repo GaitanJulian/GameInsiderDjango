@@ -22,6 +22,7 @@ urlpatterns = [
     path('', include('destacado.urls')),
     path('admin/', admin.site.urls),
      path('accounts/', include('register.urls')),
+     path('tinymce/', include('tinymce.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:

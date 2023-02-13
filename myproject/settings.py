@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'destacado.apps.DestacadoConfig',
     'crispy_forms',
     "crispy_bootstrap5",
+    'tinymce',
+    'Author.apps.AuthorConfig'
 ]
 
 MIDDLEWARE = [

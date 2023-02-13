@@ -5,45 +5,16 @@
 <link href="{% static 'styles/profile.css' %}" rel="stylesheet">
 {% endblock extrahead %}
 {% block content %}
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="card no-animated no-shadow">
-        <div class="card-header">
-          Login
-        </div>
-        <div class="card-body ">
-          <form action="{% url 'login' %}" method="post">
-            {% csrf_token %}
-            {% if form.errors %}
-              <p>Your username and password didn't match. Please try again.</p>
-              {% endif %}
-
-              {% if next %}
-                  {% if user.is_authenticated %}
-                  <p>Your account doesn't have access to this page. To proceed,
-                  please login with an account that has access.</p>
-                  {% else %}
-                  <p>Please login to see this page.</p>
-                  {% endif %}
-            {% endif %}
-            <div class="mb-3">
-              <label for="email" class="form-label">Username</label>
-              {{ form.username}}
-            </div>
-            <div class="mb-3">
-              <label for="password" class="form-label">Password</label>
-              {{ form.password }}
-            </div>
-            <div class="d-grid gap-2">
-              <button type="submit" class="btn btn-primary w-100">Login</button>
-            </div>
-          </form>
-        </div>
-      </div>
+{% block content %}
+    <div class="text-center mt-5">
+        <h1>Log In </h1>
     </div>
-  </div>
-</div>
+    <form method="POST" action=".">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary w-100" value="Singin">Sign Up</button>
+    </form>
+{% endblock content %}
 {% endblock content %}
 
     

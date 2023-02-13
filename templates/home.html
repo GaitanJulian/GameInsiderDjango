@@ -1,13 +1,13 @@
 {% extends 'base.html' %} 
-
+{% load static %}
 {% block extrahead %} 
-<link href="../static/styles/home.css" rel="stylesheet">
+<link href="{% static 'styles/home.css' %}" rel="stylesheet">
 {% endblock extrahead %} 
 
 {% block content %}
 <!------------------------------------------------LOGO HOME-------------------------------------------------->
   <div class="logo-container"> <!-- usé esta pagina para el logo https://app.logo.com/flow/type/-->
-    <img src="../static/logos/gameinsider-high-resolution-logo-black-on-transparent-background.png" alt="Logo" class="logo">
+    <img src="{% static 'logos/gameinsider-high-resolution-logo-black-on-transparent-background.png' %}" alt="Logo" class="logo">
   </div>
 
 <!---------------------------------------------------FORM PARA SEARCH------------------------------------------------>
@@ -17,14 +17,14 @@
       <button type="submit" id="search-button"><i class="fa-solid fa-magnifying-glass" id="search-icon"></i></button>
     </form>
   </div>
-<!-----------------------------------------------CARRUSEL DE IMAGENES / NOTICIAS----------------------------------------->
+<!-----------------------------------------------CARRUSEL DE IMAGENES / NOTICIAS------------------------------------------>
 
   <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
         <div class="cards-wrapper">
         <div class="card">
-          <img src="../static/news/hollow.jpg" class="card-img-top" alt="...">
+          <img src="{% static 'news/hollow.jpg' %}" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Card title</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -32,7 +32,7 @@
           </div>
         </div>
         <div class="card d-none d-md-block">
-          <img src="../static/news/silksong.jpeg" class="card-img-top" alt="...">
+          <img src="{% static 'news/silksong.jpeg' %}" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Card title</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -40,7 +40,7 @@
           </div>
         </div>
         <div class="card d-none d-md-block">
-          <img src="../static/news/hogwarts.jpg" class="card-img-top" alt="...">
+          <img src="{% static 'news/hogwarts.jpg' %}" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Card title</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -52,7 +52,7 @@
       <div class="carousel-item">
         <div class="cards-wrapper">
           <div class="card">
-            <img src="../static/news/sifu.jpg" class="card-img-top" alt="...">
+            <img src="{% static 'news/sifu.jpg' %}" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">Card title</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -60,7 +60,7 @@
             </div>
           </div>
           <div class="card d-none d-md-block">
-            <img src="../static/news/elden.jpg" class="card-img-top" alt="...">
+            <img src="{% static 'news/elden.jpg' %}" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">Card title</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -68,7 +68,7 @@
             </div>
           </div>
           <div class="card d-none d-md-block">
-            <img src="../static/news/dark.jpg" class="card-img-top" alt="...">
+            <img src="{% static 'news/dark.jpg' %}" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">Card title</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -80,7 +80,7 @@
       <div class="carousel-item">
         <div class="cards-wrapper">
           <div class="card">
-            <img src="../static/news/stardew.jpg" class="card-img-top" alt="...">
+            <img src="{% static 'news/stardew.jpg' %}" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">Card title</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -88,7 +88,7 @@
             </div>
           </div>
           <div class="card d-none d-md-block">
-            <img src="../static/news/cities.jpg" class="card-img-top" alt="...">
+            <img src="{% static 'news/cities.jpg' %}" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">Card title</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -96,7 +96,7 @@
             </div>
           </div>
           <div class="card d-none d-md-block">
-            <img src="../static/news/project.jpg" class="card-img-top" alt="...">
+            <img src="{% static 'news/project.jpg' %}" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">Card title</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>

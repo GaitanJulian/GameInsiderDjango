@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'juegos.apps.JuegosConfig',
     'publicaciones.apps.PublicacionesConfig',
     'destacado.apps.DestacadoConfig',
-    'register,'
+    'crispy_forms',
+    "crispy_bootstrap5",
 ]
 
 MIDDLEWARE = [
@@ -140,3 +141,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"

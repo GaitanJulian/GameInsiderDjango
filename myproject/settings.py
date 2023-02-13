@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'juegos.apps.JuegosConfig',
     'publicaciones.apps.PublicacionesConfig',
     'destacado.apps.DestacadoConfig',
+    'register,'
 ]
 
 MIDDLEWARE = [
@@ -136,3 +137,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # MEDIA ROOT
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/accounts/login/'

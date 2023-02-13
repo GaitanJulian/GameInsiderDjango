@@ -25,10 +25,9 @@ def signin(request):
             password = form.cleaned_data.get("password")
             user = authenticate(username=user, password=password)
             if user is not None:
-                return redirect("home")
-            
-        context.update({
-            "form": form,
-            "tittle": "Signin"
-        })
-    return render(request, "registration/login.html", context)
+                return redirect("home")  
+    context.update({
+        "form": form,
+        "tittle": "Signin"
+    })
+    return render(request, "registration/signin.html", context)

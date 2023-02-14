@@ -24,11 +24,12 @@ def create_post(request):
     return render(request, "create_post.html", context) 
 
 
-def search_post(request):
+def search(request):
     context = {}
     query = request.GET.get('search')
-    posts = Post.objects.filter(title_icontains=query)
+    posts = Post.objects.filter(title__contains=query)
     context.update({
         "posts" : posts,
+        "query" : query,
     })
     return render(request, 'search.html', context)

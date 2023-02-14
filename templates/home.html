@@ -11,12 +11,12 @@
   </div>
 
 <!---------------------------------------------------FORM PARA SEARCH------------------------------------------------>
-  <div class="search-container">
-    <form method="get" action="./search.html">
-      <input type="text" placeholder="Search..." id="search" value="" name="search">
-      <button type="submit" id="search-button"><i class="fa-solid fa-magnifying-glass" id="search-icon"></i></button>
-    </form>
-  </div>
+<div class="search-container">
+  <form method="get" action="{% url 'search' %}">
+    <input type="text" placeholder="Search..." id="search" value="{{ request.GET.search }}" name="search">
+    <button type="submit" id="search-button"><i class="fa-solid fa-magnifying-glass" id="search-icon"></i></button>
+  </form>
+</div>
 <!-----------------------------------------------CARRUSEL DE IMAGENES / NOTICIAS------------------------------------------>
 
   <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">

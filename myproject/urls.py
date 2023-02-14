@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
      path('accounts/', include('register.urls')),
      path('tinymce/', include('tinymce.urls')),
-     path('',include('publicaciones.urls')),
+     path('', include('publicaciones.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:

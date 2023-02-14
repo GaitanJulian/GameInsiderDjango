@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from register.forms import UpdateForm
-
+from django.contrib.auth import logout as lt
 # Create your views here.
 def signup(request):
     context = {}
@@ -12,7 +12,7 @@ def signup(request):
         if form.is_valid():
             new_user = form.save()
             login(request, new_user)
-            return redirect("home")
+            return redirect("update_profile")
     context.update( {
         "form":form,
         "title" : "Signup",
@@ -28,6 +28,7 @@ def signin(request):
             password = form.cleaned_data.get("password")
             user = authenticate(username=user, password=password)
             if user is not None:
+                login(request, user)
                 return redirect("home")  
     context.update({
         "form": form,
@@ -51,3 +52,9 @@ def update_profile(request):
         "form" : form,
         "title" : "Update Profile"
     })
+    return render(request, "registration/update.html", context)
+
+@login_required
+def logout(request):
+    lt(request)
+    return redirect("home")

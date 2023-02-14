@@ -1,11 +1,12 @@
 from django.urls import path
 
 from . import views
-from .views import signup, signin, update_profile
+from .views import signup, signin, update_profile, logout
 
 urlpatterns = [
     #ruta, vista, nombre interno
     path('signup/', signup, name='singup'),
     path('signin/', signin, name='singin'),
-    path('update_profile/', update_profile, name="update_profile"),
+    path("update_profile/", update_profile, name="update_profile"),
+    path('logout/', logout, name='logout'),
     ]

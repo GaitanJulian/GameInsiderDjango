@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
+from register.forms import UpdateForm
+
 # Create your views here.
 def signup(request):
     context = {}
@@ -31,3 +34,20 @@ def signin(request):
         "tittle": "Signin"
     })
     return render(request, "registration/signin.html", context)
+
+@login_required
+def update_profile(request):
+    context = {}
+    user = request.user
+    form = UpdateForm(request.POST, request.FILES)
+    if request.method == "POST":
+        if form.is_valid():
+            update_profile = form.save(commit = False)
+            update_profile.user = user
+            update_profile.save()
+            return redirect("home")
+
+    context.update({
+        "form" : form,
+        "title" : "Update Profile"
+    })

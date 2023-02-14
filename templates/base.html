@@ -18,7 +18,7 @@
     {% block navBar %}
     <nav class="navbar navbar-expand-lg navbar-dark custom-nav-bg">
         <div class="container-fluid">
-          <a class="navbar-brand d-flex align-items-center" href="./home.html">
+          <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
             <img src="{% static 'logos/gameinsider-website-favicon-black.png' %}" alt="Logo" width="30" height="33" class="d-inline-block align-text-top mr-2">
             GameInsider
           </a>
@@ -29,13 +29,13 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="./home.html">Home</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">News</a>
+                <a class="nav-link disabled" href="#">News</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Lastest Games</a>
+                <a class="nav-link disabled" href="#">Lastest Games</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link disabled">Favorites</a>
@@ -46,8 +46,14 @@
                 <img src="{% static 'logos/user.png' %}" alt="Profile Picture" class="profile-picture ml-auto" id="profile-pic">
               </div>
               <div class="dropdown-menu bg-dark" id="profile-menu">
-                <a href="./profile.html" class="dropdown-item dropdown-item-text text-info">Edit Profile</a>
-                <a href="#" class="dropdown-item dropdown-item-text text-info">Log Out</a>
+                {% if user.is_authenticated  %}
+                  <a href="./profile.html" class="dropdown-item dropdown-item-text text-info">Edit Profile</a>
+                  <a href="{% url 'logout' %}" class="dropdown-item dropdown-item-text text-info">Log Out</a>
+                {% else %}
+                <a href="{% url 'signup' %}" class="dropdown-item dropdown-item-text text-info">Sign Up now!</a>
+                <a href="{% url 'signin' %}" class="dropdown-item dropdown-item-text text-info">Sign In</a>
+                {% endif %}
+             
               </div>
             </div>
           </div>

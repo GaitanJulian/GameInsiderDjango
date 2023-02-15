@@ -47,7 +47,15 @@
             {% endblock extra_navBar  %}
             <div class="dropdown">
               <div class="dropdown-toggle" data-toggle="dropdown">
-                <img src="{% static 'logos/user.png' %}" alt="Profile Picture" class="profile-picture ml-auto" id="profile-pic">
+                {% if user.is_authenticated %}
+                  {% if user.author.profile_pic %}
+                      <img src="{{ MEDIA_URL }}{{ user.author.profile_pic.url }}" alt="Profile Picture" class="profile-picture ml-auto" id="profile-pic">
+                  {% else %}
+                      <img src="{% static 'logos/user.png' %}" alt="Profile Picture" class="profile-picture ml-auto" id="profile-pic">
+                  {% endif %}
+                {% else %}
+                  <img src="{% static 'logos/user.png' %}" alt="Profile Picture" class="profile-picture ml-auto" id="profile-pic">
+                {% endif %}
               </div>
                   <div class="dropdown-menu bg-dark" id="profile-menu">
                     {% if user.is_authenticated  %}

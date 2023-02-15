@@ -3,6 +3,7 @@
 {% block extrahead %} 
 <link href="{% static 'styles/home.css' %}" rel="stylesheet">
 <link href="{% static 'styles/search.css' %}" rel="stylesheet">
+<link href="{% static 'styles/profile.css' %}" rel="stylesheet">
 {% endblock extrahead %} 
 {% block ul %}
   <ul class="navbar-nav me-lg-1 mb-2 mb-lg-0">
@@ -16,27 +17,41 @@
 </div>
 {% endblock extra_navBar %}  
 {% block content %}
-  <h2>Search results for "{{query}}":</h2>
+<h2 class="display-4 mb-4">Search results for "{{ query }}":</h2>
       <!-------------------------------------------PUBLICATIONS------------------------------------------------------------>
-      {% if posts %}
-        {% for post in posts  %}
-        <div class="publication">
-          <h3 class="title">{{ post.title}}</h3>
-          <div class="text">{{ post.content|slice:":400"|safe }}{% if post.content|length > 100 %}(...){% endif %}</div>
-          {% if post.thumbnail %}
-            <img src="{{ MEDIA_URL }}{{ post.thumbnail.url }}" alt="Publication Image" class="img-fluid">
-          {% endif %}
-          <div class="metadata">
-              <i class="fa-sharp fa-solid fa-heart thumbs-up"></i>
-              <span>123</span>
-              <i class="fa-solid fa-comment comments"></i>
-              <span>456</span>
+      <div class="row">
+        {% if posts %}
+          {% for post in posts  %}
+            <div class="col-md-6 col-lg-4 mb-4">
+              <div class="card-wrapper">
+                <div class="card">
+                  {% if post.thumbnail %}
+                    <img src="{{ MEDIA_URL }}{{ post.thumbnail.url }}" class="card-img-top" alt="Publication Image">
+                    {% else %}
+                    <img src="{% static 'logos/gameinsider-low-resolution-logo-white-on-black-background.png' %}" class="card-img-top" alt="Publication Image">
+                  {% endif %}
+                  <div class="card-body">
+                    <h5 class="card-title"><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h5>
+                    <p class="card-text">{{ post.content|slice:":400"|safe }}{% if post.content|length > 100 %}(...){% endif %}</p>
+                  </div>
+                  <div class="card-footer">
+                    <div class="metadata">
+                      <i class="fa-sharp fa-solid fa-heart thumbs-up"></i>
+                      <span>123</span>
+                      <i class="fa-solid fa-comment comments"></i>
+                      <span>456</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          <div class="col text-center">
+            <p>No search results found</p>
           </div>
-        </div>
-        {% endfor %}
-      {% else %}
-        <p>No search results found</p>
-      {% endif %}
+        {% endif %}
+      </div>
 {% endblock content%}
 {% block scripts %}
 <script src="{% static 'js/search.js' %}"></script>

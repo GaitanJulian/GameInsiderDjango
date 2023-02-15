@@ -30,7 +30,7 @@
               <div class="card-body">
                 <h5 class="card-title">{{ game.name }}</h5>
                 <p class="card-text">{{game.description|truncatechars:100 }}</p>
-                <a href="{{ game.get_absolute_url }}" class="btn btn-primary">Learn more</a>
+                <a href="{% url 'search' %}?search={{game.name}}" class="btn btn-primary">Look inside!</a>
               </div>
             </div>
           {% endfor %}

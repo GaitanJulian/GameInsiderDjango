@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     "crispy_bootstrap5",
     'tinymce',
-    'Author.apps.AuthorConfig'
+    'Author.apps.AuthorConfig',
 ]
 
 MIDDLEWARE = [
@@ -70,6 +70,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'Author.context_processor.author'
             ]
         },
     },
@@ -143,7 +144,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = '/media/'
 
 LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/accounts/login/'
+LOGOUT_REDIRECT_URL = '/accounts/signin/'
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"

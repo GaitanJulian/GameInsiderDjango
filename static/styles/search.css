@@ -107,6 +107,11 @@
   margin: 0 2px;
 }
 
+
+.card-wrapper {
+  min-height: 400px;
+}
+
 /* Ajustes responsive */
 
 @media (max-width: 990px){

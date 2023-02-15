@@ -4,6 +4,9 @@
 <link href="{% static 'styles/home.css' %}" rel="stylesheet">
 <link href="{% static 'styles/search.css' %}" rel="stylesheet">
 {% endblock extrahead %} 
+{% block ul %}
+  <ul class="navbar-nav me-lg-1 mb-2 mb-lg-0">
+{% endblock ul %}
 {% block extra_navBar %}
 <div class="search-container-nav">
   <form method="get" action="{% url 'search' %}">
@@ -13,7 +16,7 @@
 </div>
 {% endblock extra_navBar %}  
 {% block content %}
-  <h2>Search results for "{{query}}:"</h2>
+  <h2>Search results for "{{query}}":</h2>
       <!-------------------------------------------PUBLICATIONS------------------------------------------------------------>
       {% if posts %}
         {% for post in posts  %}
@@ -21,7 +24,9 @@
           <h3 class="title">{{ post.title}}</h3>
           <p class="text"> {{ post.content}}
           </p>
-          <img src=" {{post.thumbnail}}" alt="Publication Image" class="img-fluid">
+          {% if post.thumbnail %}
+            <img src="{{ MEDIA_URL }}{{ post.thumbnail.url }}" alt="Publication Image" class="img-fluid">
+          {% endif %}
           <div class="metadata">
               <i class="fa-sharp fa-solid fa-heart thumbs-up"></i>
               <span>123</span>

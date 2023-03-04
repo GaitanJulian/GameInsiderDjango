@@ -19,19 +19,19 @@
 {% block content %}
 <h2 class="display-4 mb-4">Search results for "{{ query }}":</h2>
       <!-------------------------------------------PUBLICATIONS------------------------------------------------------------>
-      <div class="row">
+      <div class="row justify-content-center no-gutters">
         {% if posts %}
-          {% for post in posts  %}
-            <div class="col-md-6 col-lg-4 mb-4">
+          {% for post in posts %}
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
               <div class="card-wrapper">
                 <div class="card">
                   {% if post.thumbnail %}
-                    <img src="{{ MEDIA_URL }}{{ post.thumbnail.url }}" class="card-img-top" alt="Publication Image">
-                    {% else %}
-                    <img src="{% static 'logos/gameinsider-low-resolution-logo-white-on-black-background.png' %}" class="card-img-top" alt="Publication Image">
+                    <img src="{{ MEDIA_URL }}{{ post.thumbnail.url }}" class="card-img-top w-100" alt="Publication Image">
+                  {% else %}
+                    <img src="{% static 'logos/gameinsider-low-resolution-logo-white-on-black-background.png' %}" class="card-img-top w-100" alt="Publication Image">
                   {% endif %}
-                  <div class="card-body">
-                    <h5 class="card-title"><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h5>
+                  <div class="card-body card-body-custom">
+                    <h5 class="card-title text-truncate"><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h5>
                     <p class="card-text">{{ post.content|slice:":400"|safe }}{% if post.content|length > 100 %}(...){% endif %}</p>
                   </div>
                   <div class="card-footer">

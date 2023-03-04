@@ -58,6 +58,11 @@
 
 /* --------------------------- PUBLICACIONES RELACIONADAS ---------------------------------*/
 
+ .row {
+    margin-right: 0;
+    margin-left: 0;  
+  }
+
 
 .publication {
   display: flex;
@@ -88,7 +93,7 @@
   align-items: center;
   font-size: 14px;
   color: #999;
-  }
+}
 
 .thumbs-up {
   margin-right: 5px;
@@ -107,9 +112,28 @@
   margin: 0 2px;
 }
 
-
 .card-wrapper {
-  min-height: 400px;
+  min-height: 400px
+}
+
+.card{
+  width: 100%;
+}
+
+.card-body-custom {
+  height: 150px; /* set a fixed height */
+  overflow-y: scroll; /* enable vertical scrolling */
+}
+
+.card-body {
+  overflow-y: auto;
+  scrollbar-width: none; /* hide scrollbar for Firefox */
+  -ms-overflow-style: none; /* hide scrollbar for IE and Edge */
+}
+
+.card-body::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* hide scrollbar for Chrome, Safari, and Opera */
 }
 
 /* Ajustes responsive */

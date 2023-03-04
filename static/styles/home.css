@@ -218,6 +218,7 @@ form {
   
   .carousel-item {
     transition: transform 0.3s ease-in-out, opacity 0.6s ease-in-out;
+
 }
 
 /*---------  Selectores de ID ----------*/

@@ -4,6 +4,7 @@ from juegos.models import Game
 from Author.models import Author
 from tinymce.models import HTMLField
 from django_resized import ResizedImageField
+from datetime import datetime
 # Create your models here.
 class Post(models.Model):
     title = models.CharField(max_length=100)
@@ -15,11 +16,18 @@ class Post(models.Model):
     def __str__(self):
         return self.title
     
+    def num_likes(self):
+        return self.like_set.count()
+
+    def num_comments(self):
+        return self.comments.count()
+
 class Like(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='likes')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    text = models.TextField()
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    content = models.TextField()
+    created_at = models.DateTimeField(default=datetime.now)

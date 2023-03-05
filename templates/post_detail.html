@@ -1,4 +1,5 @@
 {% extends 'search.html' %} 
+
 {% block content %}
     <div class="container my-4">
         <div class="card no-animated no-shadow">
@@ -18,8 +19,78 @@
                     </div>
                 </div>
             </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-md-6">
+                        <button class="like-btn btn btn-primary" data-post-id="{{ post.id }}">
+                            <i class="far fa-thumbs-up"></i> 
+                            <span>{{ post.num_likes }} Likes</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        {% block comments %}
+        <div class="card no-animated no-shadow my-4">
+            <div class="card-header">
+                <h3 class="text-primary">{{ post.comments.count }} Comments</h3>
+            </div>
+            <div class="card-body">
+                {% if user.is_authenticated %}
+                    <form action="{% url 'add_comment' post.id %}" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="comment">Add a comment:</label>
+                            <textarea class="form-control" rows="3" id="comment" name="content" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                {% else %}
+                    <p>You must be <a href="{% url 'signin' %}">logged in</a> to post comments.</p>
+                {% endif %}
+
+                <hr>
+
+                {% for comment in post.comments.all %}
+                    <div class="card my-2">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ comment.author }}</h5>
+                            <p class="card-text">{{ comment.content }}</p>
+                            <p class="card-text text-muted">{{ comment.created_at }}</p>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p>No comments yet.</p>
+                {% endfor %}
+            </div>
+        </div>
+        {% endblock comments %}
     </div>
 {% endblock content %}
 {% block scripts %}
+<script>
+    $(document).ready(function() {
+        $('.like-btn').on('click', function() {
+            var postId = $(this).data('post-id');
+            var likeCountSpan = $(this).siblings('.like_count');
+            $.ajax({
+                type: "POST",
+                url: "{% url 'like_post' %}",
+                data: {
+                    'post_id': postId,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}',
+                },
+                dataType: "json",
+                success: function(response) {
+                    likeCountSpan.text(response.likes);
+                    location.reload();
+                },
+                error: function(response) {
+                    console.log(response);
+                }
+            });
+        });
+    });
+    </script>
 {% endblock scripts %}

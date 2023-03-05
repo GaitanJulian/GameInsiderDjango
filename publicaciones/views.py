@@ -3,7 +3,7 @@ from .forms import PostForm, CommentForm
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from Author.models import Author
-from .models import Post, Like
+from .models import Post, Like, Comment
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from django.utils import timezone
@@ -82,3 +82,10 @@ def add_comment(request, post_id):
     }
     
     return render(request, 'post_detail.html', context)
+
+@login_required
+def delete_comment(request, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+    if request.method == 'POST' and comment.author.user == request.user:
+        comment.delete()
+    return redirect('post_detail', post_id=comment.post.id)

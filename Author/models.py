@@ -9,7 +9,7 @@ class Author(models.Model):
     fullname = models.CharField(max_length=40, blank=True)
     bio = HTMLField()
     points = models.IntegerField(default=0)
-    profile_pic = ResizedImageField(size=[50, 80], quality=100, upload_to="authors", default=None, null=True, blank=True)
+    profile_pic = ResizedImageField(size=[100, 100], quality=100, upload_to="authors", default=None, null=True, blank=True)
     
     def __str__(self):
         return self.fullname

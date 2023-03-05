@@ -53,16 +53,25 @@
                 <hr>
 
                 {% for comment in post.comments.all %}
-                    <div class="card my-2">
-                        <div class="card-body">
+                <div class="card no-animated my-2">
+                    <div class="card-body ">
+                        <div class="d-flex align-items-center">
+                            <img src="{{ comment.author.profile_pic.url }}" alt="{{ comment.author.fullname }}" style="max-height: 50px; width: auto;">
                             <h5 class="card-title">{{ comment.author }}</h5>
-                            <p class="card-text">{{ comment.content }}</p>
-                            <p class="card-text text-muted">{{ comment.created_at }}</p>
                         </div>
+                        <p class="card-text">{{ comment.content }}</p>
+                        <p class="card-text text-muted">{{ comment.created_at }}</p>
+                        {% if user == comment.author.user %}
+                            <form method="post" action="{% url 'delete_comment' comment.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        {% endif %}
                     </div>
-                {% empty %}
-                    <p>No comments yet.</p>
-                {% endfor %}
+                </div>
+            {% empty %}
+                <p>No comments yet.</p>
+            {% endfor %}
             </div>
         </div>
         {% endblock comments %}

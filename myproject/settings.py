@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
+    'django.template',
     'juegos.apps.JuegosConfig',
     'publicaciones.apps.PublicacionesConfig',
     'destacado.apps.DestacadoConfig',
@@ -71,7 +73,10 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'Author.context_processor.author'
-            ]
+            ],
+            'libraries': {
+                'defaultfilters': 'django.template.defaultfilters',
+            },
         },
     },
 ]

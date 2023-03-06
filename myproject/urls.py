@@ -24,6 +24,7 @@ urlpatterns = [
      path('accounts/', include('register.urls')),
      path('tinymce/', include('tinymce.urls')),
      path('', include('publicaciones.urls')),
+     path('', include('Author.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns +=  static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

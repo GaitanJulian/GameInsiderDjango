@@ -1,70 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-    crossorigin="anonymous"></script>
-  <script src="https://kit.fontawesome.com/918dea5264.js" crossorigin="anonymous"></script>
-  <link href="./styles/home.css" rel="stylesheet">
-  <link href="./styles/search.css" rel="stylesheet">
-  <link href="./styles/profile.css" rel="stylesheet">
-  <title>GameInsider</title>
-  <link rel="icon" type="image/x-icon" href="./logos/gameinsider-website-favicon-black.png"> 
-</head>
-<body>
-    <!-------------------------------------------------NAVBAR--------------------------------------------------------------------->
-    <nav class="navbar navbar-expand-lg navbar-dark custom-nav-bg">
-        <div class="container-fluid">
-          <a class="navbar-brand d-flex align-items-center" href="./home.html">
-            <img src="./logos/gameinsider-website-favicon-black.png" alt="Logo" width="30" height="33" class="d-inline-block align-text-top mr-2">
-            GameInsider
-          </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-lg-1 mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="./home.html">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">News</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Lastest Games</a>
-              </li>
-              <li class="nav-item right-item">
-                <a class="nav-link disabled">Favorites</a>
-              </li>
-            </ul>
-            <div class="search-container-nav">
-                <form method="get" action="./search.html">
-                    <input type="text" placeholder="Search..." id="search" name="search" value="">
-                    <button type="submit"><i class="fa-solid fa-magnifying-glass" id="search-icon"></i></button>
-                </form>
-            </div>
-            <div class="dropdown">
-              <div class="dropdown-toggle" data-toggle="dropdown">
-                <img src="./logos/user.png" alt="Profile Picture" class="profile-picture ml-auto" id="profile-pic">
-              </div>
-              <div class="dropdown-menu bg-dark" id="profile-menu">
-                <a href="#" class="dropdown-item dropdown-item-text text-info">Edit Profile</a>
-                <a href="#" class="dropdown-item dropdown-item-text text-info">Log Out</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
-      <!------------------------------------------------PROFILE PAGE------------------------------------------------------------------->
+{% extends 'base.html' %} 
+{% load static %}
+{% load author_tags %}
+{% block extrahead %} 
+{% load defaultfilters %}
+<link href="{% static 'styles/home.css' %}" rel="stylesheet">
+<link href="{% static 'styles/search.css' %}" rel="stylesheet">
+<link href="{% static 'styles/profile.css' %}" rel="stylesheet">
+{% endblock extrahead %} 
+{% block ul %}
+  <ul class="navbar-nav me-lg-1 mb-2 mb-lg-0">
+{% endblock ul %}
+{% block extra_navBar %}
+<div class="search-container-nav">
+  <form method="get" action="{% url 'search' %}">
+    <input type="text" placeholder="Search..." id="search" value="{{ request.GET.search }}" name="search">
+    <button type="submit" id="search-button"><i class="fa-solid fa-magnifying-glass" id="search-icon"></i></button>
+  </form>
+</div>
+{% endblock extra_navBar %}
+{% block content %}  
+      <!------------------------------------------------PROFILE PAGE-------------------------------------------------------------------->
       <section>
         <div class="container py-5">
           <div class="row">
@@ -72,26 +27,17 @@
               <div class="col-lg-4">
                 <div class="card mb-4 no-animated">
                   <div class="card-body text-center">
-                    <img src="./logos/user.png" alt="avatar" class="rounded-circle img-fluid">
-                    <h5 class="my-3">Julian Gaitan</h5>
-                    <p class="text-muted mb-1">JulianG</p>
-                    <p class="text-muted mb-1">Member since 30-01-2023</p>
+                    {% if author.profile_pic %}
+                      <img src="{{ MEDIA_URL }}{{ author.profile_pic.url }}" alt="Profile Picture" class="profile-picture ml-auto" id="profile-pic" style="width: 60%; height: 60%">
+                    {% else %}
+                      <img src="{% static 'logos/user.png' %}" alt="Profile Picture" class="profile-picture ml-auto" id="profile-pic">
+                    {% endif %}
+                    <h5 class="my-3">{{author.fullname}}</h5>
+                    <p class="text-muted mb-1">{{author.user.username}}</p>
+                    <p class="text-muted mb-1">Member since {{author.user.date_joined}}</p>
                   </div>
-                </div>
-                <div class="card mb-4 mb-lg-0 no-animated no-shadow">
-                  <div class="card-header text-center">
-                    <h4 class="mb-0">Player Badges</h4>
-                  </div>
-                  <div class="card-body p-0">
-                    <ul class="list-group list-group-flush rounded-3">
-                      <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                        <i class="fas fa-poo" style="color: #4d0c0c;" data-badge-name="Poo Post"></i>
-                        <i class="far fa-smile-beam" style="color: #333333;" data-badge-name="Awesome Post"></i>
-                        <i class="fas fa-fire" style="color: #e63a0a;" data-badge-name="On Fire"></i>
-                        <i class="fas fa-gamepad" style="color: #ac2bac;" data-badge-name="Gamer"></i>
-                        <i class="fas fa-desktop" style="color: #3b5998;" data-badge-name="Classic Player"></i>
-                      </li>
-                    </ul>
+                  <div class="card-footer text-center">
+                    <p class="text-muted">{{ author.bio }}</p>
                   </div>
                 </div>
               </div>
@@ -101,79 +47,37 @@
                     <h5>Publications</h5>
                     <div class="sort-buttons">
                       <button class="btn btn-secondary">Newer</button>
-                      <button class="btn btn-secondary">Featured</button>
-                      <button class="btn btn-secondary">Most Viewed</button>
+                      <button class="btn btn-secondary">Most Popular</button>
                     </div>
                   </div>
                 </div>
-                  <div class="row">
+                <div class="row">
+                  {% for post in author.post_set.all|reverse %}
                     <div class="col-md-6">
                       <div class="card mb-4 mb-md-0 mt-3">
                         <div class="card-body">
-                          <p class="mb-4"><span class="text-primary font-italic me-1">Minecraft</span> End Palace.
+                          <p class="mb-4"><span class="text-primary font-italic me-1">{{ post.game.name }}</span>{{ post.title }}
                           </p>
-                          <img src="./posts/hollow-post.jpg" alt="Publication Image" class="img-fluid">
+                          {% if post.thumbnail %}
+                            <img src="{{ post.thumbnail.url }}" alt="Publication Image" class="img-fluid">
+                          {% endif %}
                           <div class="metadata">
                             <i class="fa-sharp fa-solid fa-heart thumbs-up"></i>
-                            <span>123</span>
+                            <span>{{ post.num_likes }}</span>
                             <i class="fa-solid fa-comment comments"></i>
-                            <span>456</span>
+                            <span>{{ post.num_comments }}</span>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-6">
-                      <div class="card mb-4 mb-md-0 mt-3">
-                        <div class="card-body">
-                          <p class="mb-4"><span class="text-primary font-italic me-1">Project Zomboid</span> Blind run guide.
-                          </p>
-                          <img src="./posts/hollow-post.jpg" alt="Publication Image" class="img-fluid">
-                          <div class="metadata">
-                            <i class="fa-sharp fa-solid fa-heart thumbs-up"></i>
-                            <span>123</span>
-                            <i class="fa-solid fa-comment comments"></i>
-                            <span>456</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="card mb-4 mb-md-0 mt-3">
-                        <div class="card-body">
-                          <p class="mb-4"><span class="text-primary font-italic me-1">Stardew Valley</span> Ten years farm.
-                          </p>
-                          <img src="./posts/hollow-post.jpg" alt="Publication Image" class="img-fluid">
-                          <div class="metadata">
-                            <i class="fa-sharp fa-solid fa-heart thumbs-up"></i>
-                            <span>123</span>
-                            <i class="fa-solid fa-comment comments"></i>
-                            <span>456</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="card mb-4 mb-md-0 mt-3">
-                        <div class="card-body">
-                          <p class="mb-4"><span class="text-primary font-italic me-1">Stardew Valley</span> Ten years farm.
-                          </p>
-                          <img src="./posts/hollow-post.jpg" alt="Publication Image" class="img-fluid">
-                          <div class="metadata">
-                            <i class="fa-sharp fa-solid fa-heart thumbs-up"></i>
-                            <span>123</span>
-                            <i class="fa-solid fa-comment comments"></i>
-                            <span>456</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                    {% if forloop.counter|divisibleby:2 %}
+                      </div><div class="row">
+                    {% endif %}
+                  {% endfor %}
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
-</body>
-</html>
+{% endblock content%}

@@ -60,7 +60,7 @@
               </div>
                   <div class="dropdown-menu bg-dark" id="profile-menu">
                     {% if user.is_authenticated  %}
-                      <a href="./profile.html" class="dropdown-item dropdown-item-text text-info">Edit Profile</a>
+                      <a href="{% url 'profile' %}" class="dropdown-item dropdown-item-text text-info">Edit Profile</a>
                       <a href="{% url 'create_post' %}" class="dropdown-item dropdown-item-text text-info">New Post!</a>
                       <a href="{% url 'logout' %}" class="dropdown-item dropdown-item-text text-info">Log Out</a>
                     {% else %}

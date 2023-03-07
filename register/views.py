@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from register.forms import UpdateForm
 from django.contrib.auth import logout as lt
+from Author.models import Author
 # Create your views here.
 def signup(request):
     context = {}
@@ -53,6 +54,23 @@ def update_profile(request):
         "title" : "Update Profile"
     })
     return render(request, "registration/update.html", context)
+
+@login_required
+def update_bio(request):
+    context = {}
+    user = request.user
+    author = get_object_or_404(Author, user=user)
+    form = UpdateForm(request.POST or None, request.FILES or None, instance=author)
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            return redirect("home")
+
+    context.update({
+        "form" : form,
+        "title" : "Update Profile"
+    })
+    return render(request, "registration/bio.html", context)
 
 @login_required
 def logout(request):

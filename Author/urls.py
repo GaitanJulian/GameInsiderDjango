@@ -4,5 +4,5 @@ from .views import profile
 
 urlpatterns = [
     #ruta, vista, nombre interno
-    path('profile/', profile, name='profile')
+    path('profile/', profile, name='profile'),
 ]

@@ -25,7 +25,7 @@
           <div class="row">
             <div class="row">
               <div class="col-lg-4">
-                <div class="card mb-4 no-animated">
+                <div class="card mb-4 no-animated" style="max-height: 500px">
                   <div class="card-body text-center">
                     {% if author.profile_pic %}
                       <img src="{{ MEDIA_URL }}{{ author.profile_pic.url }}" alt="Profile Picture" class="profile-picture ml-auto" id="profile-pic" style="width: 60%; height: 60%">
@@ -38,6 +38,7 @@
                   </div>
                   <div class="card-footer text-center">
                     <p class="text-muted">{{ author.bio }}</p>
+                    <a href="{% url 'update_bio' %}" class="btn btn-primary">Update Profile</a>
                   </div>
                 </div>
               </div>
@@ -46,21 +47,21 @@
                   <div class="col-md-12 d-flex justify-content-between align-items-center p-3 mb-3">
                     <h5>Publications</h5>
                     <div class="sort-buttons">
-                      <button class="btn btn-secondary">Newer</button>
-                      <button class="btn btn-secondary">Most Popular</button>
+                      <button id="newer-button" class="btn btn-secondary">Newer</button>
+                      <button id="older-button" class="btn btn-secondary">Older</button>
+                      <button id="popular-button" class="btn btn-secondary">Most Liked</button>
+                      <button id="commented-button" class="btn btn-secondary">Most Commented</button>
                     </div>
                   </div>
                 </div>
-                <div class="row">
-                  {% for post in author.post_set.all|reverse %}
-                    <div class="col-md-6">
+                <div id="posts-container" class="row">
+                  {% for post in posts %}
+                  <div class="col-md-6" data-likes="{{ post.num_likes }}" data-comments="{{ post.num_comments }}" data-creation-time="{{ post.created_at.timestamp }}" style="margin-bottom: 10px;">
+                    <a href="{% url 'post_detail' post_id=post.id %}">
                       <div class="card mb-4 mb-md-0 mt-3">
                         <div class="card-body">
-                          <p class="mb-4"><span class="text-primary font-italic me-1">{{ post.game.name }}</span>{{ post.title }}
-                          </p>
-                          {% if post.thumbnail %}
-                            <img src="{{ post.thumbnail.url }}" alt="Publication Image" class="img-fluid">
-                          {% endif %}
+                          <p class="mb-4"><span class="text-primary font-italic me-1">{{ post.game }}</span>{{ post.title }}</p>
+                          <img src="{{ post.thumbnail.url }}" alt="Publication Image" class="img-fluid">
                           <div class="metadata">
                             <i class="fa-sharp fa-solid fa-heart thumbs-up"></i>
                             <span>{{ post.num_likes }}</span>
@@ -69,10 +70,8 @@
                           </div>
                         </div>
                       </div>
-                    </div>
-                    {% if forloop.counter|divisibleby:2 %}
-                      </div><div class="row">
-                    {% endif %}
+                    </a>
+                  </div>
                   {% endfor %}
                 </div>
               </div>
@@ -81,3 +80,76 @@
         </div>
       </section>
 {% endblock content%}
+{% block scripts %}
+<script>
+/// Get the container element and all the post elements inside it
+const container = document.getElementById("posts-container");
+const posts = container.querySelectorAll(".col-md-6");
+
+// Convert the post elements to an array and sort them by their creation time
+const sortedPostsByTime = Array.from(posts).sort((a, b) => {
+    const timeA = parseInt(a.getAttribute("data-creation-time"));
+    const timeB = parseInt(b.getAttribute("data-creation-time"));
+    return timeB - timeA;
+});
+
+// Convert the post elements to an array and sort them by their creation time in reverse
+const sortedPostsByOlder = Array.from(posts).sort((a, b) => {
+  const timeA = parseInt(a.getAttribute("data-creation-time"));
+  const timeB = parseInt(b.getAttribute("data-creation-time"));
+  return timeA - timeB;
+});
+
+// Function to sort posts by number of likes
+const sortByLikes = () => {
+  $('.row').each(function() {
+    var posts = $(this).children();
+    posts.sort(function(a, b) {
+      var aLikes = parseInt($(a).attr('data-likes'));
+      var bLikes = parseInt($(b).attr('data-likes'));
+      return bLikes - aLikes;
+    });
+    $(this).empty().append(posts);
+  });
+}
+
+// Function to sort posts by number of comments
+const sortByComments = () => {
+  $('.row').each(function() {
+    var posts = $(this).children();
+    posts.sort(function(a, b) {
+      var aComments = parseInt($(a).attr('data-comments'));
+      var bComments = parseInt($(b).attr('data-comments'));
+      return bComments - aComments;
+    });
+    $(this).empty().append(posts);
+  });
+}
+
+// Attach click event listener to the "Newer" button
+document.getElementById("newer-button").addEventListener("click", () => {
+  // Append the sorted post elements to the container
+  container.innerHTML = '';
+  sortedPostsByTime.forEach(post => container.appendChild(post));
+});
+
+document.getElementById("older-button").addEventListener("click", () => {
+  // Append the sorted post elements to the container
+  container.innerHTML = '';
+  sortedPostsByOlder.forEach(post => container.appendChild(post));
+});
+
+// Attach click event listener to the "Most Popular" button
+document.getElementById("popular-button").addEventListener("click", () => {
+  // Execute the sortByLikes function to sort the posts by likes
+  sortByLikes();
+});
+
+// Attach click event listener to the "Most Commented" button
+document.getElementById("commented-button").addEventListener("click", () => {
+  // Execute the sortByLikes function to sort the posts by likes
+  sortByComments();
+});
+
+</script>
+{% endblock scripts %}

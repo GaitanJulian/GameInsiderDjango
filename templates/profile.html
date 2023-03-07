@@ -61,7 +61,11 @@
                       <div class="card mb-4 mb-md-0 mt-3">
                         <div class="card-body">
                           <p class="mb-4"><span class="text-primary font-italic me-1">{{ post.game }}</span>{{ post.title }}</p>
+                          {% if post.thumbnail %}
                           <img src="{{ post.thumbnail.url }}" alt="Publication Image" class="img-fluid">
+                          {% else %}
+                          <img src="{% static 'logos/gameinsider-low-resolution-logo-white-on-black-background.png' %}" class="card-img-top w-100" alt="Publication Image">
+                          {% endif %}
                           <div class="metadata">
                             <i class="fa-sharp fa-solid fa-heart thumbs-up"></i>
                             <span>{{ post.num_likes }}</span>

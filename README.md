@@ -239,3 +239,7 @@ def delete_comment(request, comment_id):
         comment.delete()
     return redirect('post_detail', post_id=comment.post.id)
 ```
+This methods are all related to the posts, for example here are the codes necesary for making a comment in a posts or deleting a comment. Searching posts, opening a post or liking a post.
+
+## STATIC FILES
+The static files include the css for all the project, I mainly used bootstrap but there was necessary to make custom styling to the page, also this static folder includes the logos used in the webpage as well as some images.

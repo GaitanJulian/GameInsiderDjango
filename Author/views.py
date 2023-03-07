@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from publicaciones.models import Post
 from .models import Author
-from django.views.generic.list import ListView
-from django.db.models import Count
+from django.contrib.auth.decorators import login_required
 # Create your views here.
+@login_required
 def profile(request):
     context = {}
     author = Author.objects.get(user = request.user)

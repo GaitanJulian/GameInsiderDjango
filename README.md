@@ -1,5 +1,5 @@
 # GAME INSIDER
-#### Video Demo:  <URL HERE>
+#### Video Demo:  <https://youtu.be/fmIaGJ3BC2Y>
 #### Description: The following project is a page to publish forums about video games, users can search for posts about their favorite videos, like and comment on the posts they want. Users can also edit their own profile, and log in to see in an orderly fashion all the posts they have made. The project was made using the django framework.
 
 ## Models
